@@ -112,7 +112,7 @@ class ImageNormalizeIter : public IIterator<DataInst> {
         CHECK_EQ(data.size(), 1)
             << "Invalid mean image file format";
         data[0].WaitToRead();
-        mshadow::Tensor<cpu, 3> src = data[0].data().get<cpu, 3, real_t>();
+        mshadow::Tensor<cpu, 3, real_t> src = data[0].data().get<cpu, 3, real_t>();
         meanimg_.Resize(src.shape_);
         mshadow::Copy(meanimg_, src);
         meanfile_ready_ = true;
@@ -143,9 +143,9 @@ class ImageNormalizeIter : public IIterator<DataInst> {
   // normalize parameter.
   ImageNormalizeParam param_;
   /*! \brief mean image, if needed */
-  mshadow::TensorContainer<cpu, 3> meanimg_;
+  mshadow::TensorContainer<cpu, 3, real_t> meanimg_;
   /*! \brief temp space for output image */
-  mshadow::TensorContainer<cpu, 3> outimg_;
+  mshadow::TensorContainer<cpu, 3, real_t> outimg_;
   /*! \brief random numeber engine */
   common::RANDOM_ENGINE rnd_;
   // random magic number of this iterator
@@ -172,7 +172,7 @@ class ImageNormalizeIter : public IIterator<DataInst> {
 
     std::uniform_real_distribution<float> rand_uniform(0, 1);
     std::bernoulli_distribution coin_flip(0.5);
-    mshadow::Tensor<cpu, 3> data = src.data[0].get<cpu, 3, real_t>();
+    mshadow::Tensor<cpu, 3, real_t> data = src.data[0].get<cpu, 3, real_t>();
 
     outimg_.Resize(data.shape_);
     float contrast =

@@ -16,8 +16,11 @@
 
 #include "../common/utils.h"
 
+
 namespace mxnet {
 namespace io {
+
+
 /*!
  * \brief OpenCV based Image augmenter,
  *  The augmenter can contain internal temp state.
@@ -83,7 +86,10 @@ struct ImageAugmenterReg
 namespace mxnet {
 namespace io {
 /*! \return the parameter of default augmenter */
-std::vector<dmlc::ParamFieldInfo> ListDefaultAugParams();
+// std::vector<dmlc::ParamFieldInfo> ListDefaultAugParams();
+/*! \return the parameter of default augmenter */
+std::vector<dmlc::ParamFieldInfo> ListTorchAugParams();
+
 }  // namespace io
 }  // namespace mxnet
 #endif  // MXNET_IO_IMAGE_AUGMENTER_H_
