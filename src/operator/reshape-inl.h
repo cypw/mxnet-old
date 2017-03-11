@@ -230,7 +230,7 @@ class ReshapeProp : public OperatorProperty {
         dshape_vec.push_back(dshape[i]);
       }
       std::vector<int> tmp;
-      int src_idx = 0;
+      index_t src_idx = 0;
       int inf_idx = -1;
       size_t new_size = dshape.Size();
       if (param_.reverse) {
@@ -278,7 +278,7 @@ class ReshapeProp : public OperatorProperty {
           CHECK(d1 != -1 || d2 != -1) << "Split dims cannot both be -1.";
           if (d1 == -1) d1 = d0 / d2;
           if (d2 == -1) d2 = d0 / d1;
-          CHECK_EQ(d1 * d2, d0) <<
+          CHECK_EQ(d1 * d2, static_cast<int>(d0)) <<
             "Split dims " << d1 << ", " << d2 << " do not divide original dim " << d0;
           new_size /= d0;
           tmp.push_back(d1);
