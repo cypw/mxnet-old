@@ -29,7 +29,7 @@ class KVStoreServer(object):
                 # the reason put the codes here is because we cannot get
                 # kvstore.rank earlier
                 head = '%(asctime)-15s Server[' + str(
-                    self.kvstore.rank) + '] %(message)s'
+                    self.kvstore.rank).rjust(2) + '] %(message)s'
                 logging.basicConfig(level=logging.DEBUG, format=head)
                 self.init_logginig = True
 
@@ -40,8 +40,8 @@ class KVStoreServer(object):
                     raise
                 self.kvstore.set_optimizer(optimizer)
             else:
-                print ("server %d, unknown command (%d, %s)" % (
-                    self.kvstore.rank, cmd_id, cmd_body))
+                print ("server %s, unknown command (%d, %s)" % (
+                    str(self.kvstore.rank).rjust(2), cmd_id, cmd_body))
         return server_controller
 
     def run(self):
