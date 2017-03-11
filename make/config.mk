@@ -45,8 +45,18 @@ USE_CUDA = 0
 # USE_CUDA_PATH = /usr/local/cuda
 USE_CUDA_PATH = NONE
 
+NVCCFLAGS_ARCH = -gencode arch=compute_35,code=sm_35 \
+                 -gencode arch=compute_50,code=sm_50 \
+                 -gencode=arch=compute_52,code=sm_52 \
+                 -gencode=arch=compute_52,code=compute_52
+
 # whether use CuDNN R3 library
 USE_CUDNN = 0
+
+# add the path to CUDNN library to link and compile flag
+# if you have already add them to environment variable, leave it as NONE
+# USE_CUDNN_PATH = /opt/cudnn
+USE_CUDNN_PATH = NONE
 
 # whether use cuda runtime compiling for writing kernels in native language (i.e. Python)
 USE_NVRTC = 0
