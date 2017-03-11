@@ -75,6 +75,15 @@ bool StaticGraph::InferNodeShapes(const std::vector<uint32_t> &topo_order,
             continue;
           return false;
         }
+        const char* is_print = std::getenv("MXNET_PRINT_NET_STRUCTURE");
+        if ((is_print != NULL) && !(std::strcmp(is_print, "1"))) {
+            // for debugging
+            std::ostringstream os;
+            for (TShape shape : (*node_out_shapes)[nid]) {
+            os << " " << shape;
+            }
+            LOG(INFO) << node.name << os.str();
+        }
       } catch (const op::InferShapeError &err) {
         // error handling
         const std::string &op_name = node.name;
